@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b5566">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="הטיול הגדול">
+<title>הטיול הגדול</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700;900&family=Heebo:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a travel magazine written about the two of you — confident, literate, calm
+   IDEA: every screen is a page of an issue; headlines are live sentences about your trip
+   PICTURE: the Patagonia-at-dusk cover, full bleed, with the countdown set in a heavy serif
+   COLOUR and TYPE: white paper, ink black, lagoon teal, one coral accent; Frank Ruhl Libre display + Heebo text
+   LAYOUT: 600px column, heavy rules and hairlines, cover + contents hub, 4 text tabs */
+:root{color-scheme:light dark;--paper:light-dark(#ffffff,#0f1113);--ink:light-dark(#111418,#f1f1ee);--soft:light-dark(#f3f4f2,#181b1e);
+--hair:light-dark(#dcdedb,#2b2f34);--mute:light-dark(#5d636a,#a3a7ad);--sea:light-dark(#0b5566,#63c2d4);--acc:#ff5a36;--good:light-dark(#0d7a4f,#4fd39a)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 Heebo,system-ui,sans-serif;overflow-x:clip}
+.app{max-width:600px;margin:0 auto;padding:0 20px 120px}
+.sf{font-family:'Frank Ruhl Libre',Georgia,serif}
+h1,h2,h3{font-family:'Frank Ruhl Libre',Georgia,serif;margin:0;line-height:1.05;text-wrap:balance}
+h1{font-size:clamp(42px,12vw,64px);font-weight:900;letter-spacing:-.5px}
+h2{font-size:clamp(30px,8.5vw,42px);font-weight:700}
+h3{font-size:22px;font-weight:700}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.num{font-variant-numeric:tabular-nums lining-nums;white-space:nowrap}
+.kick{font-size:13px;font-weight:600;color:var(--acc);letter-spacing:.2px}
+.deck{font-size:18px;line-height:1.55;color:var(--mute);margin:12px 0 0;max-width:34em}
+.deck b{color:var(--ink);font-weight:600}
+.mute{color:var(--mute)}.sm{font-size:14px}.xs{font-size:13px;color:var(--mute)}
+.rule{border:0;border-top:3px solid var(--ink);margin:0}.hair{border:0;border-top:1px solid var(--hair);margin:0}
+.hero{position:relative;margin:0 -20px;color:#fff;height:min(88vh,640px);min-height:520px;overflow:hidden;text-shadow:0 1px 18px rgba(0,0,0,.35)}
+.hero svg.beach{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hov{position:absolute;inset:0;padding:22px 20px 26px;display:flex;flex-direction:column}
+.hm{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding-bottom:10px;border-bottom:3px solid #fff}
+.hmeta{display:flex;justify-content:space-between;gap:10px;font-size:14px;padding-top:8px}
+.hb{margin-top:auto}.hb .cd{font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(104px,32vw,160px);line-height:.85;letter-spacing:-3px}
+.hb .cl{font-family:'Frank Ruhl Libre',serif;font-size:26px;font-weight:500;margin-top:10px}.hb .tag{font-size:14px;margin-top:6px;opacity:.95}
+.hero .av{border-color:#fff;color:#fff;background:rgba(0,0,0,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);text-shadow:none}
+@media(prefers-reduced-motion:no-preference){.foam{animation:foam 5s ease-in-out infinite alternate}@keyframes foam{to{transform:translateX(-14px);opacity:.6}}
+ .glint{animation:glint 3.5s ease-in-out infinite alternate}@keyframes glint{to{opacity:.45}}
+ .boat{animation:bob 4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes bob{to{transform:translateY(3px) rotate(-1deg)}}}
+.ck{transition:background .15s,transform .15s}
+body.ck-circle .ck{border-radius:50%;border-color:var(--sea)}body.ck-circle .ck.on{background:var(--sea);border-color:var(--sea)}
+body.ck-coral .ck{border-radius:8px;border-color:var(--acc)}body.ck-coral .ck.on{background:var(--acc);border-color:var(--acc)}body.ck-coral .ck svg{color:#fff}
+body.ck-stamp .ck{border-radius:50%;border:2px dashed var(--mute)}body.ck-stamp .ck.on{background:transparent;border:2.5px solid var(--acc);transform:rotate(-12deg)}body.ck-stamp .ck.on svg{color:var(--acc);stroke-width:3.2}
+body.ck-circle .ck.on svg{color:#fff}
+.styles{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.styles button{display:flex;align-items:center;gap:8px;border:1px solid var(--hair);background:transparent;color:var(--ink);padding:6px 12px;min-height:44px;border-radius:2px;font-size:14px}
+.styles button.on{border:1.5px solid var(--ink)}
+.styles .ck{pointer-events:none}
+.styles button.ck-sq .ck.on{border-radius:2px;background:var(--ink);border:1.5px solid var(--ink);transform:none}.styles button.ck-sq .ck.on svg{color:var(--paper)}
+.styles button.ck-circle .ck.on{border-radius:50%;background:var(--sea);border:1.5px solid var(--sea);transform:none}.styles button.ck-circle .ck.on svg{color:#fff}
+.styles button.ck-coral .ck.on{border-radius:8px;background:var(--acc);border:1.5px solid var(--acc);transform:none}.styles button.ck-coral .ck.on svg{color:#fff}
+.styles button.ck-stamp .ck.on{border-radius:50%;background:transparent;border:2.5px solid var(--acc);transform:rotate(-12deg)}.styles button.ck-stamp .ck.on svg{color:var(--acc)}
+body .ck:not(.on) svg{opacity:.2;color:var(--mute)}
+body.ck-circle .ck:not(.on){border:2px solid color-mix(in srgb,var(--sea) 45%,transparent)}
+body.ck-coral .ck:not(.on){border:2px solid color-mix(in srgb,var(--acc) 55%,transparent)}
+.ck:active{transform:scale(.9)}
+.dates{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;margin-top:12px;padding:10px 0;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+.dates b{display:block;font-family:'Frank Ruhl Libre',serif;font-size:19px;font-weight:700}
+.ed2{grid-column:1/-1;display:grid;gap:14px;margin-top:14px;padding:16px;background:var(--soft)}
+.ed2 label{display:grid;gap:2px;font-size:13px;font-weight:600;color:var(--mute)}
+.ed2 .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+.ed2 input,.ed2 select{color:var(--ink);font-weight:400}
+.hero .bgimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;background:#1d8a9a}
+.hero .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,30,40,.62) 0%,rgba(4,30,40,.12) 28%,rgba(4,30,40,0) 50%,rgba(4,30,40,.25) 68%,rgba(4,30,40,.78) 100%)}
+@media(prefers-reduced-motion:no-preference){.hero .bgimg{animation:kb 22s ease-in-out infinite alternate}@keyframes kb{from{transform:scale(1.02)}to{transform:scale(1.1) translateY(-1.5%)}}}
+.tag{display:inline-block;font:600 11px Heebo,sans-serif;color:#fff;background:var(--sea);padding:1px 7px;border-radius:99px;vertical-align:2px}
+.owe{margin-top:22px;padding:18px;background:var(--soft);display:grid;gap:6px}.owe b{font-family:'Frank Ruhl Libre',serif;font-size:22px}.owe .btn{margin-top:8px;min-height:46px}
+.flf{display:grid;gap:12px;margin-top:16px;padding:16px;background:var(--soft)}.flf .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+nav{padding-bottom:env(safe-area-inset-bottom)}.hov{padding-top:max(22px,env(safe-area-inset-top))}.ph{padding-top:max(26px,env(safe-area-inset-top))}
+/* masthead */
+.mast{padding:22px 0 12px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.mast .who{font-size:13px;color:var(--mute);text-align:left;line-height:1.4}
+.meta{display:flex;justify-content:space-between;gap:10px;padding:8px 0;font-size:13px;color:var(--mute);border-bottom:1px solid var(--hair)}
+.av{border:1px solid var(--ink);background:transparent;color:var(--ink);font:600 13px Heebo,sans-serif;border-radius:99px;padding:6px 14px;min-height:36px;cursor:pointer;white-space:nowrap}
+.av::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--hair);margin-inline-end:7px;vertical-align:1px}
+.av.ok::before{background:var(--good)}
+/* cover */
+.cover{position:relative;margin:18px -20px 0;color:#fff;overflow:hidden}
+.cover svg.scene{display:block;width:100%;height:clamp(300px,82vw,420px)}
+.cover .ov{position:absolute;inset:0;padding:22px 20px;display:flex;flex-direction:column}
+.cover .cd{font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(96px,30vw,150px);line-height:.85;letter-spacing:-3px}
+.cover .cl{font-family:'Frank Ruhl Libre',serif;font-size:24px;font-weight:500;margin-top:8px}
+.cover .tag{margin-top:auto;font-size:14px;opacity:.9}
+.lines{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-bottom:1px solid var(--hair)}
+.lines div{padding:16px 0 16px}.lines div+div{border-inline-start:1px solid var(--hair);padding-inline-start:14px}
+.lines b{display:block;font-family:'Frank Ruhl Libre',serif;font-size:clamp(22px,6.4vw,30px);font-weight:700;line-height:1.1}
+/* contents */
+.tocs{display:grid;gap:12px;margin-top:16px}
+.toc{display:flex;gap:16px;align-items:flex-start;padding:18px;background:var(--soft);border-radius:6px;text-decoration:none;color:var(--ink);position:relative;transition:transform .15s}
+.toc:active{transform:scale(.985)}
+.toc::after{content:"←";position:absolute;top:16px;left:18px;font-size:18px;color:var(--mute)}
+.toc .t{flex:1;padding-left:22px}.toc h3{margin:3px 0 10px;font-size:clamp(20px,5.6vw,24px)}
+.toc.feat{background:var(--ink);color:var(--paper)}.toc.feat .xs,.toc.feat::after{color:color-mix(in srgb,var(--paper) 65%,transparent)}.toc.feat .mbar{background:color-mix(in srgb,var(--paper) 20%,transparent)}.toc.feat .mbar i{background:var(--acc)}
+.th{width:52px;height:52px;border-radius:4px;display:grid;place-items:center;flex:none;color:#fff}.th svg{width:26px;height:26px;stroke-width:1.6}
+.th-sea{background:var(--sea)}.th-acc{background:var(--acc)}.th-ink{background:#2c3a40}.th-sand{background:#d9a35f}
+.mini{display:flex;align-items:center;gap:10px;margin-bottom:6px;font-size:14px;font-weight:600}.mbar{flex:1;height:5px;border-radius:9px;background:var(--hair);overflow:hidden}.mbar i{display:block;height:100%;background:var(--sea);border-radius:9px}
+.stops{display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-size:13px}.stops span{background:var(--paper);border:1px solid var(--hair);padding:3px 10px;border-radius:99px;white-space:nowrap}.stops b{color:var(--acc);font-weight:700}
+.sechead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:40px;padding-bottom:10px;border-bottom:3px solid var(--ink)}
+.sechead h3{font-size:24px}
+.tlink{background:none;border:0;padding:8px 0;min-height:44px;color:var(--ink);font:500 15px Heebo,sans-serif;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--acc);text-decoration-thickness:2px;cursor:pointer}
+/* page head */
+.ph{padding:26px 0 18px;border-bottom:3px solid var(--ink)}
+.ph .back{display:inline-flex;align-items:center;gap:6px;color:var(--mute);text-decoration:none;font-size:14px;margin-bottom:14px;min-height:32px}
+.figure{font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:clamp(56px,17vw,88px);line-height:.95;letter-spacing:-1.5px;margin-top:22px}
+/* rows */
+.r{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--hair);min-height:60px}
+.r .t{flex:1}.r .t small{display:block;font-size:13px;color:var(--mute)}
+.r .v{font-family:'Frank Ruhl Libre',serif;font-size:20px;font-weight:700}
+.lead{flex:1;border-bottom:1px dotted var(--hair);margin:0 6px;align-self:center;height:1px}
+input,select{font:17px Heebo,sans-serif;min-height:44px;padding:8px 2px;border:0;border-bottom:1.5px solid var(--ink);border-radius:0;background:transparent;color:var(--ink);width:100%}
+.r input,.r select{width:120px;text-align:left;direction:ltr}.r input[type=date]{width:150px}
+input:focus,select:focus{outline:none;border-bottom-color:var(--acc);border-bottom-width:2.5px}
+button{font:500 16px Heebo,sans-serif;cursor:pointer}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:54px;border:0;border-radius:2px;background:var(--ink);color:var(--paper);font-size:17px;font-weight:600}
+.btn.line{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.ck{width:26px;height:26px;border:1.5px solid var(--ink);border-radius:2px;background:transparent;display:grid;place-items:center;padding:0;color:var(--paper);flex:none}
+.ck svg{width:16px;height:16px;stroke-width:2.8;opacity:0}.ck.on{background:var(--ink)}.ck.on svg{opacity:1}
+.done .t{color:var(--mute);text-decoration:line-through;text-decoration-color:var(--acc)}
+.fr{min-width:32px;height:32px;border-radius:99px;border:1px dashed var(--mute);background:transparent;color:var(--mute);font-size:13px;padding:0 8px;flex:none}
+.fr.on{border:1px solid var(--sea);background:var(--sea);color:var(--paper)}
+.del{border:0;background:none;color:var(--acc);font-size:14px;font-weight:600;padding:0 4px;min-height:44px;flex:none}
+.add{display:flex;gap:12px;align-items:flex-end;padding:16px 0;border-bottom:1px solid var(--hair)}
+.add button{flex:none;border:0;background:var(--ink);color:var(--paper);min-height:44px;padding:0 18px;border-radius:2px}
+.tabs{display:flex;gap:22px;margin-top:20px;border-bottom:1px solid var(--hair)}
+.tabs button{border:0;background:none;padding:10px 0 12px;color:var(--mute);font:600 17px Heebo,sans-serif;border-bottom:3px solid transparent;margin-bottom:-1px;min-height:44px}
+.tabs button.on{color:var(--ink);border-bottom-color:var(--acc)}
+.bar{height:4px;background:var(--hair);margin-top:14px}.bar i{display:block;height:100%;background:var(--ink)}.bar i.acc{background:var(--acc)}.bar i.good{background:var(--good)}
+.quote{font-family:'Frank Ruhl Libre',serif;font-size:21px;line-height:1.4;border-inline-start:3px solid var(--acc);padding:2px 16px 2px 0;margin:28px 0}
+/* route */
+.leg{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 16px;padding:20px 0;border-bottom:1px solid var(--hair)}
+.leg .n{font-family:'Frank Ruhl Libre',serif;font-weight:900;font-size:44px;line-height:.9;color:var(--sea)}
+.leg .fit{font-size:13px;font-weight:600}
+.ed{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) 80px;gap:10px 14px;margin-top:10px}.ed .w{grid-column:1/-1}
+.cal{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+.cal th{font-weight:500;color:var(--mute);padding:6px 0;text-align:center}.cal th.me{color:var(--acc);font-weight:700}
+.cal th:first-child,.cal td:first-child{text-align:start;width:38%;padding-inline-end:8px}
+.cal td{padding:7px 1px;border-top:1px solid var(--hair);text-align:center}
+.cal td i{display:block;height:12px;border-radius:2px;background:var(--soft)}.cal td i.s2{background:var(--sea)}.cal td i.s1{background:color-mix(in srgb,var(--sea) 35%,transparent)}
+details{border-bottom:1px solid var(--hair)}summary{list-style:none;cursor:pointer;padding:18px 0;display:flex;align-items:center;gap:10px;font:600 17px Heebo,sans-serif;min-height:58px}
+summary::-webkit-details-marker{display:none}summary .pm{margin-inline-start:auto;font-family:'Frank Ruhl Libre',serif;font-size:26px;font-weight:400;line-height:1;transition:transform .2s}details[open] summary .pm{transform:rotate(45deg)}
+.dbody{padding-bottom:18px}
+/* trip */
+.chart{display:flex;align-items:flex-end;gap:5px;height:84px;margin-top:22px;border-bottom:1.5px solid var(--ink)}
+.chart div{flex:1;height:100%;display:flex;align-items:flex-end}.chart i{display:block;width:100%;background:var(--hair);min-height:2px}.chart i.v{background:var(--ink)}.chart i.over{background:var(--acc)}
+.cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--hair);border-inline-start:1px solid var(--hair)}
+.cats button{display:flex;flex-direction:column;align-items:center;gap:6px;border:0;border-bottom:1px solid var(--hair);border-inline-end:1px solid var(--hair);background:transparent;color:var(--mute);padding:14px 2px;font-size:14px;min-height:78px;border-radius:0}
+.cats button.on{background:var(--ink);color:var(--paper)}
+.who{display:flex;border:1.5px solid var(--ink);margin-top:14px}.who button{flex:1;border:0;background:transparent;color:var(--ink);min-height:46px;border-radius:0}.who button+button{border-inline-start:1.5px solid var(--ink)}.who button.on{background:var(--ink);color:var(--paper)}
+/* nav, fab, sheet */
+nav{position:fixed;bottom:0;inset-inline:0;z-index:30;background:color-mix(in srgb,var(--paper) 94%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1.5px solid var(--ink)}
+nav .in{max-width:600px;margin:0 auto;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0 12px}
+nav a{display:flex;justify-content:center;align-items:center;min-height:62px;color:var(--mute);text-decoration:none;font:600 17px 'Frank Ruhl Libre',serif;position:relative}
+nav a.on{color:var(--ink)}nav a.on::after{content:"";position:absolute;top:-1.5px;inset-inline:22%;height:4px;background:var(--acc)}
+.fab{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);z-index:25;height:54px;padding:0 28px;border:0;border-radius:2px;background:var(--ink);color:var(--paper);font-size:17px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:0 10px 24px rgba(0,0,0,.18)}
+.fab[hidden]{display:none}
+.scrim{position:fixed;inset:0;background:rgba(10,12,14,.5);z-index:40;opacity:0;pointer-events:none;transition:opacity .2s}
+.sheet{position:fixed;inset-inline:0;bottom:0;z-index:41;max-width:600px;margin:0 auto;background:var(--paper);border-top:3px solid var(--ink);padding:20px 20px 26px;transform:translateY(105%);visibility:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),visibility .3s;max-height:92vh;overflow:auto}
+.open .scrim{opacity:1;pointer-events:auto}.open .sheet{transform:none;visibility:visible}
+.amt{display:flex;align-items:flex-end;gap:14px;margin:10px 0 20px}
+.amt input{font:900 52px 'Frank Ruhl Libre',serif;text-align:center;direction:ltr;min-height:76px}
+.amt input::-webkit-inner-spin-button,.amt input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}.amt input{-moz-appearance:textfield}
+.amt select{width:84px;font-size:20px;font-weight:600}
+.toast{position:fixed;top:16px;left:50%;transform:translate(-50%,-30px);background:var(--ink);color:var(--paper);padding:10px 20px;font-size:15px;opacity:0;transition:.25s;z-index:50;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.empty{padding:28px 0;color:var(--mute);font-family:'Frank Ruhl Libre',serif;font-size:20px}
+@media(prefers-reduced-motion:no-preference){.plane{animation:fly 9s ease-in-out infinite alternate}@keyframes fly{from{offset-distance:12%}to{offset-distance:88%}}
+ .rise{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}.d1{animation-delay:.08s}.d2{animation-delay:.16s}.d3{animation-delay:.24s}@keyframes rise{from{opacity:0;transform:translateY(14px)}}}
+@media(prefers-reduced-motion:reduce){.sheet,.scrim{transition:none}}
+@media(max-width:370px){.r input,.r select{width:100px}nav a{font-size:16px}}
+</style>
+</head>
+<body>
+<main class="app"><div id="view"></div></main>
+<button class="fab" id="fab" hidden></button>
+<div><div class="scrim" data-close></div>
+<form class="sheet" id="exf" aria-label="הוצאה חדשה">
+  <div style="display:flex;justify-content:space-between;align-items:baseline"><h3>הוצאה חדשה</h3><button type="button" class="tlink" data-close>סגירה</button></div>
+  <div class="amt"><input name="a" type="text" inputmode="decimal" data-fmt placeholder="0" required aria-label="סכום" autocomplete="off"><select name="c" id="cur" aria-label="מטבע"></select></div>
+  <div class="cats" id="cats"></div>
+  <div class="xs" style="margin-top:14px">מי שילם?</div><div class="who" id="paySeg" style="margin-top:6px"></div><div class="xs" style="margin-top:12px">עבור מי?</div><div class="who" id="forSeg" style="margin-top:6px"></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:16px"><input name="dt" type="date" id="dt" aria-label="תאריך"><input name="n" placeholder="על מה?" maxlength="80"></div>
+  <button class="btn" style="margin-top:22px">שמירה ביומן</button>
+</form></div>
+<div class="toast" id="toast"></div>
+<nav><div class="in" id="nav"></div></nav>
+<script>
+{
+const MO=['ינו','פבר','מרץ','אפר','מאי','יוני','יולי','אוג','ספט','אוק','נוב','דצמ'];
+const R={
+ thailand:{n:'תאילנד',z:'המזרח',u:35,s:[2,2,1,1,0,0,0,0,0,1,2,2],x:'נובמבר–פברואר יבש ונעים. מאי–אוקטובר מונסון – זול ושקט יותר.'},
+ laos:{n:'לאוס',z:'המזרח',u:30,s:[2,2,1,1,0,0,0,0,0,1,2,2],x:'נובמבר–פברואר הכי נעים. מרץ–אפריל חם ומעושן.'},
+ cambodia:{n:'קמבודיה',z:'המזרח',u:30,s:[2,2,1,1,0,0,0,0,0,1,2,2],x:'אנגקור וואט הכי נעים בנובמבר–פברואר.'},
+ vietnam:{n:'וייטנאם',z:'המזרח',u:30,s:[1,2,2,2,1,1,1,1,0,0,1,1],x:'הצפון קר בחורף, המרכז גשום באוקטובר–נובמבר. פברואר–אפריל טוב לכל המדינה.'},
+ malaysia:{n:'מלזיה',z:'המזרח',u:40,s:[2,2,2,1,1,2,2,2,1,1,0,1],x:'החוף המערבי יבש בדצמבר–מרץ; האיים המזרחיים סגורים בנובמבר–פברואר.'},
+ singapore:{n:'סינגפור',z:'המזרח',u:80,s:[1,2,2,2,2,2,2,2,2,1,1,1],x:'חם ולח כל השנה. יקרה – בדרך כלל עצירה של כמה ימים.'},
+ indonesia:{n:'אינדונזיה (באלי)',z:'המזרח',u:35,s:[0,0,1,1,2,2,2,2,2,1,0,0],x:'באלי יבשה באפריל–אוקטובר. דצמבר–פברואר גשום.'},
+ philippines:{n:'פיליפינים',z:'המזרח',u:35,s:[2,2,2,2,1,0,0,0,0,1,1,2],x:'דצמבר–אפריל יבש. יולי–אוקטובר טייפונים.'},
+ india:{n:'הודו',z:'המזרח',u:25,s:[2,2,2,1,0,0,0,0,0,2,2,2],x:'אוקטובר–מרץ לרוב המדינה. לדאק והימלאיה ההודית ביוני–ספטמבר.'},
+ nepal:{n:'נפאל',z:'המזרח',u:25,s:[1,1,2,2,1,0,0,0,1,2,2,1],x:'אוקטובר–נובמבר ומרץ–אפריל – הכי טוב לטרקים (אנאפורנה, אוורסט).'},
+ srilanka:{n:'סרי לנקה',z:'המזרח',u:35,s:[2,2,2,2,1,1,1,1,1,1,1,2],x:'הדרום והמערב יבשים בדצמבר–אפריל; המזרח במאי–ספטמבר.'},
+ japan:{n:'יפן',z:'המזרח',u:90,s:[1,1,2,2,2,1,1,1,1,2,2,1],x:'פריחת הדובדבן בסוף מרץ–אפריל, שלכת בנובמבר. יקרה.'},
+ argentina:{n:'ארגנטינה',z:'דרום אמריקה',u:50,s:[2,2,2,1,1,0,0,0,1,1,2,2],x:'פטגוניה בנובמבר–מרץ. בואנוס איירס נעימה באביב ובסתיו.'},
+ chile:{n:'צ׳ילה',z:'דרום אמריקה',u:55,s:[2,2,2,1,0,0,0,0,1,1,2,2],x:'טורס דל פיינה בקיץ הדרומי; מדבר אטקמה כמעט כל השנה.'},
+ brazil:{n:'ברזיל',z:'דרום אמריקה',u:50,s:[1,1,1,1,2,2,2,2,2,1,1,1],x:'קרנבל בפברואר/מרץ – יקר ועמוס, אבל חוויה.'},
+ peru:{n:'פרו',z:'דרום אמריקה',u:35,s:[0,0,1,1,2,2,2,2,2,1,1,0],x:'עונה יבשה מאי–ספטמבר. שביל האינקה סגור בפברואר.'},
+ bolivia:{n:'בוליביה',z:'דרום אמריקה',u:30,s:[1,1,1,1,2,2,2,2,2,1,1,1],x:'יבש במאי–אוקטובר. בינואר–מרץ מדבר המלח אויוני הופך למראה.'},
+ colombia:{n:'קולומביה',z:'דרום אמריקה',u:40,s:[2,2,2,1,1,1,2,2,1,1,1,2],x:'נעים כמעט כל השנה; דצמבר–מרץ ויולי–אוגוסט יבשים יותר.'},
+ ecuador:{n:'אקוודור',z:'דרום אמריקה',u:40,s:[1,1,1,1,1,2,2,2,2,1,1,1],x:'נעים כל השנה. איי גלפגוס יקרים במיוחד.'},
+ uruguay:{n:'אורוגוואי',z:'דרום אמריקה',u:50,s:[2,2,2,1,1,0,0,0,1,1,2,2],x:'חופים בדצמבר–מרץ.'},
+ mexico:{n:'מקסיקו',z:'מרכז אמריקה',u:45,s:[2,2,2,2,1,0,1,1,0,1,2,2],x:'נובמבר–אפריל יבש. ספטמבר–אוקטובר עונת הוריקנים.'},
+ guatemala:{n:'גואטמלה',z:'מרכז אמריקה',u:35,s:[2,2,2,2,1,0,0,0,0,1,2,2],x:'נובמבר–אפריל יבש.'},
+ costarica:{n:'קוסטה ריקה',z:'מרכז אמריקה',u:60,s:[2,2,2,2,1,0,1,1,0,0,1,2],x:'דצמבר–אפריל יבש. יקרה יחסית.'},
+ nicaragua:{n:'ניקרגואה',z:'מרכז אמריקה',u:35,s:[2,2,2,2,1,0,0,0,0,1,2,2],x:'נובמבר–אפריל יבש.'},
+ panama:{n:'פנמה',z:'מרכז אמריקה',u:45,s:[2,2,2,2,1,0,1,1,0,0,1,2],x:'ינואר–אפריל יבש. איי סן בלאס.'},
+ cuba:{n:'קובה',z:'מרכז אמריקה',u:50,s:[2,2,2,2,1,0,0,0,0,1,2,2],x:'נובמבר–אפריל. אוגוסט–אוקטובר הוריקנים.'},
+ aus:{n:'אוסטרליה',z:'אוסטרליה ואוקיאניה',u:90,s:[1,1,2,2,2,1,1,1,2,2,2,1],x:'דצמבר–פברואר הכי יקר. הצפון הטרופי גשום בנובמבר–אפריל. שווה לבדוק ויזת Working Holiday.'},
+ nz:{n:'ניו זילנד',z:'אוסטרליה ואוקיאניה',u:85,s:[2,2,2,1,0,0,0,0,0,1,1,2],x:'קיץ בדצמבר–מרץ – טרקים ונסיעות בוואן. בחורף סקי.'},
+ fiji:{n:'פיג׳י',z:'אוסטרליה ואוקיאניה',u:70,s:[1,1,1,1,2,2,2,2,2,2,1,1],x:'מאי–אוקטובר יבש ונעים.'}
+};
+const ALIAS={patagonia:'argentina',andes:'peru',centam:'mexico',thai:'thailand',indo:'indonesia'};
+const CATS=['לינה','אוכל','תחבורה','אטרקציות','טיסות','קניות','בריאות','אחר'];
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const G=(cat,t)=>({id:uid(),cat,t,d:[false,false]});
+const LEGS=()=>[{id:uid(),r:'argentina',p:'בריילוצ׳ה, אל צ׳לטן',a:'2027-12-01',b:'2028-01-05'},{id:uid(),r:'chile',p:'טורס דל פיינה',a:'2028-01-05',b:'2028-01-25'},{id:uid(),r:'brazil',p:'איגואסו, ריו (קרנבל)',a:'2028-01-25',b:'2028-03-10'},{id:uid(),r:'bolivia',p:'אויוני',a:'2028-03-10',b:'2028-03-25'},{id:uid(),r:'peru',p:'קוסקו, מאצ׳ו פיצ׳ו',a:'2028-03-25',b:'2028-05-09'}];
+const def=()=>({names:['עמית','עובדיה'],goal:[0,0],autoDone:{},fl:[],armyT:[0,0],workT:[0,0],msh:[22000,22000],pik:[0,0],pikIn:[false,false],dis:'2027-08-03',dep:'2027-12-01',rate:3.6,
+ saved:[0,0],mArmy:[500,500],mWork:[7000,7000],grant:[false,false],
+ flights:6500,insCost:4000,gearCost:2500,buffer:10,daily:220,
+ legs:LEGS(),
+ gear:[G('מסמכים','דרכון בתוקף 6 חודשים אחרי סוף הטיול'),G('מסמכים','צילום דרכון וביטוח בענן'),G('מסמכים','רישיון נהיגה בינלאומי'),G('מסמכים','2 כרטיסי אשראי (אחד גיבוי) בלי עמלת המרה'),
+  G('תרמיל ושינה','תרמיל גב 50–65 ליטר'),G('תרמיל ושינה','תיק יום מתקפל'),G('תרמיל ושינה','שק שינה קל (לטרקים)'),G('תרמיל ושינה','מנעול קטן לתיק/לוקר'),G('תרמיל ושינה','מגבת מיקרופייבר'),G('תרמיל ושינה','שקיות אטומות למים'),
+  G('ביגוד','מעיל גשם/גורטקס'),G('ביגוד','פוך קל או פליז'),G('ביגוד','תרמית עליונה ותחתונה'),G('ביגוד','נעלי הליכה רכות'),G('ביגוד','סנדלים/כפכפים'),G('ביגוד','חולצות דרייפיט ומכנסי טיולים'),
+  G('אלקטרוניקה','סוללה ניידת'),G('אלקטרוניקה','מתאם חשמל אוניברסלי'),G('אלקטרוניקה','פנס ראש'),G('אלקטרוניקה','eSIM או כרטיס סים מקומי'),
+  G('בריאות','ערכת עזרה ראשונה'),G('בריאות','תרופות אישיות + מרשם'),G('בריאות','קרם הגנה ודוחה יתושים'),G('בריאות','טבליות טיהור מים או בקבוק עם פילטר')],
+ ins:[{id:uid(),t:'תקופת הביטוח המקסימלית מכסה את כל אורך הטיול (בחלק מהמסלולים יש תקרת ימים)'},{id:uid(),t:'אפשר להאריך את הביטוח כשאני כבר בחו״ל'},{id:uid(),t:'כיסוי רפואי בלי הגבלת סכום'},{id:uid(),t:'איתור, חיפוש וחילוץ (חובה לטרקים)'},{id:uid(),t:'הרחבת ספורט אתגרי: טרקים בגובה, רפטינג, צלילה'},{id:uid(),t:'נהיגה בקטנוע/אופנוע – לבדוק אם מכוסה ובאילו תנאים'},{id:uid(),t:'כיסוי לטלפון, מצלמה וכבודה'},{id:uid(),t:'מצב רפואי קיים – להצהיר ולוודא כיסוי'},{id:uid(),t:'תשלום ישיר במקום הוצאה מהכיס והחזר אחר כך'},{id:uid(),t:'השוואת הצעות מ-3 חברות לפחות'}].map(o=>({...o,d:[false,false]})),
+ todo:[{id:uid(),b:'dis',o:-2,t:'לסגור מקום עבודה שיתחיל מיד אחרי השחרור'},{id:uid(),b:'dis',o:0,t:'לפתוח חיסכון ייעודי לטיול + הוראת קבע ביום המשכורת'},{id:uid(),b:'dep',o:-6,t:'להגדיר התראות מחיר לטיסות (Google Flights / Skyscanner)'},{id:uid(),b:'dep',o:-5,t:'לסגור מסלול גס ולבדוק ויזות וכניסה לכל מדינה'},{id:uid(),b:'dep',o:-4,t:'לקנות כרטיס טיסה'},{id:uid(),b:'dep',o:-2,t:'מרפאת מטיילים – חיסונים (6–8 שבועות לפני)'},{id:uid(),b:'dep',o:-1.5,t:'לבדוק תוקף דרכון ולהוציא רישיון בינלאומי'},{id:uid(),b:'dep',o:-1,t:'לסגור ביטוח תרמילאים'},{id:uid(),b:'dep',o:-.5,t:'להוריד מפות ותרגום אופליין, להתקין eSIM'},{id:uid(),b:'dep',o:-.25,t:'לארוז, לשקול תרמיל ולבדוק את רשימת הציוד'}].map(o=>({...o,done:false})),
+ rates:{'₪':1,'$':3.6,'€':3.9}
+});
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// entry rules for Israeli passports (gov.il table 12.07.2026 + later news); s: free | online | visa
+const VISA={
+ thailand:{s:'online',t:'פטור מוויזה עד 30 יום (מ-15.9.2026). חובה למלא TDAC אונליין לפני הנחיתה. אפשר להאריך פעם אחת ב-30 יום במשרד הגירה.',lead:7},
+ laos:{s:'visa',t:'נדרשת ויזה – בדרך כלל ניתנת בהגעה או כויזה אלקטרונית.',lead:14},
+ cambodia:{s:'visa',t:'נדרשת ויזה – אפשר לקבל בשדה התעופה או מראש אונליין.',lead:14},
+ vietnam:{s:'visa',t:'נדרשת ויזה אלקטרונית (e-Visa) עד 90 יום. להגיש אונליין כמה שבועות לפני.',lead:21},
+ malaysia:{s:'visa',t:'נדרשת ויזה, והכניסה לבעלי דרכון ישראלי מוגבלת מאוד. לבדוק לפני שמתכננים.',lead:60},
+ singapore:{s:'free',t:'פטור מוויזה.',lead:7},
+ indonesia:{s:'visa',t:'נדרשת ויזה. לישראלים יש תהליך מיוחד (Calling Visa) – להתחיל מוקדם.',lead:60},
+ philippines:{s:'free',t:'פטור מוויזה.',lead:7},
+ india:{s:'visa',t:'נדרשת ויזה – אפשר להגיש e-Visa אונליין.',lead:30},
+ nepal:{s:'visa',t:'נדרשת ויזה – בדרך כלל ניתנת בהגעה או אונליין.',lead:14},
+ srilanka:{s:'online',t:'פטור, אבל צריך אישור נסיעה אלקטרוני (ETA) לפני הטיסה.',lead:14},
+ japan:{s:'free',t:'פטור מוויזה.',lead:7},
+ argentina:{s:'free',t:'פטור מוויזה.',lead:7},chile:{s:'free',t:'פטור מוויזה.',lead:7},brazil:{s:'free',t:'פטור מוויזה.',lead:7},peru:{s:'free',t:'פטור מוויזה.',lead:7},
+ bolivia:{s:'free',t:'פטור מוויזה עד 90 יום (מדצמבר 2025).',lead:7},
+ colombia:{s:'free',t:'פטור מוויזה.',lead:7},ecuador:{s:'free',t:'פטור מוויזה.',lead:7},uruguay:{s:'free',t:'פטור מוויזה.',lead:7},
+ mexico:{s:'free',t:'פטור מוויזה.',lead:7},guatemala:{s:'free',t:'פטור מוויזה.',lead:7},costarica:{s:'free',t:'פטור מוויזה.',lead:7},nicaragua:{s:'free',t:'פטור מוויזה.',lead:7},panama:{s:'free',t:'פטור מוויזה.',lead:7},
+ cuba:{s:'visa',t:'נדרש כרטיס תייר/ויזה – בדרך כלל דרך חברת התעופה או השגרירות.',lead:30},
+ aus:{s:'visa',t:'נדרשת ויזה: תיירות (Visitor 600) או עבודה וחופשה (462) עם מכסה שנתית – להגיש חודשים מראש.',lead:120},
+ nz:{s:'online',t:'פטור, אבל חובה NZeTA בתשלום אונליין לפני הטיסה.',lead:14},
+ fiji:{s:'free',t:'פטור מוויזה.',lead:7}
+};
+const YF=['brazil','peru','bolivia','colombia','ecuador','panama'];
+// local currency + rough ILS rate (editable)
+const CUR={thailand:['THB',0.11],laos:['LAK',0.00017],cambodia:['$',3.6],vietnam:['VND',0.00014],malaysia:['MYR',0.8],singapore:['SGD',2.75],indonesia:['IDR',0.00022],philippines:['PHP',0.063],india:['INR',0.042],nepal:['NPR',0.026],srilanka:['LKR',0.012],japan:['JPY',0.024],
+ argentina:['ARS',0.003],chile:['CLP',0.0038],brazil:['BRL',0.65],peru:['PEN',0.97],bolivia:['BOB',0.52],colombia:['COP',0.0009],ecuador:['$',3.6],uruguay:['UYU',0.09],
+ mexico:['MXN',0.19],guatemala:['GTQ',0.47],costarica:['CRC',0.007],nicaragua:['NIO',0.1],panama:['$',3.6],cuba:['$',3.6],aus:['AUD',2.35],nz:['NZD',2.15],fiji:['FJD',1.6]};
+// climate tags → suggested gear
+const TAGS={cold:['argentina','chile','peru','bolivia','nepal','nz','japan'],alt:['peru','bolivia','nepal','ecuador'],
+ trop:['thailand','laos','cambodia','vietnam','malaysia','singapore','indonesia','philippines','srilanka','india','brazil','colombia','mexico','guatemala','costarica','nicaragua','panama','cuba','fiji','aus'],
+ temple:['thailand','laos','cambodia','vietnam','srilanka','india','nepal','japan','indonesia']};
+const TGEAR={cold:['מעיל פוך חם','כפפות וכובע צמר','תרמיות חמות','שק שינה עד מינוס 5'],alt:['משקפי שמש איכותיים','קרם הגנה חזק לגובה','בקבוק מים גדול (שתייה בגובה)'],
+ trop:['בגד ים','כפכפים','דוחה יתושים חזק (DEET)','כובע שמש','מסכת שנורקל'],temple:['בגד שמכסה כתפיים וברכיים (מקדשים)'],rain:['פונצ׳ו או כיסוי גשם לתרמיל','שקיות אטומות לטלפון']};
+
+const IC={home:'<path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',wallet:'<rect x="3" y="6" width="18" height="14" rx="3"/><path d="M3 10h18M16 15h2M6 6l9-3 2 3"/>',map:'<path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2zM9 4v14M15 6v14"/>',bag:'<path d="M6 9a6 6 0 0 1 12 0v10a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2z"/><path d="M9 3.5h6M9 14h6v4H9z"/>',shield:'<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',receipt:'<path d="M5 3h14v18l-3-2-2 2-2-2-2 2-2-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',check:'<path d="m5 12 5 5 9-10"/>',x:'<path d="M6 6l12 12M18 6 6 18"/>',edit:'<path d="M4 20h4L19 9l-4-4L4 16zM13 7l4 4"/>',trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/>',cal:'<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5"/>',
+plane:'<path d="M10.5 3.5 13 10l6 .5c1.5.2 1.5 2.8 0 3l-6 .5-2.5 6.5H8.5l1-6.5-4 .5-1.5 2H2.5l.5-3.5-.5-3.5H4l1.5 2 4 .5-1-6.5z"/>',bed:'<path d="M3 19V6M3 15h18v4M21 15v-3a3 3 0 0 0-3-3h-7v6"/><circle cx="7" cy="11.5" r="2"/>',food:'<path d="M7 3v18M4 3v5a3 3 0 0 0 6 0V3M17 21V3c-2.5 0-4 3-4 8h4"/>',bus:'<rect x="4" y="3" width="16" height="15" rx="3"/><path d="M4 11h16M7 21v-3M17 21v-3M8 14.5h.01M16 14.5h.01"/>',ticket:'<path d="M3 7h18v3a2 2 0 0 0 0 4v3H3v-3a2 2 0 0 0 0-4z"/><path d="M14 7v10" stroke-dasharray="2 2"/>',shop:'<path d="M5 8h14l-1 13H6z"/><path d="M9 8a3 3 0 0 1 6 0"/>',health:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>',dots:'<circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/>',piggy:'<path d="M5 11a7 6 0 0 1 13-2l2-1v4l-1 1v3h-2l-1 2h-3v-1H9v1H6l-1-3a6 6 0 0 1 0-4z"/><path d="M15 10h.01"/>',flag:'<path d="M5 21V4h11l-2 4 2 4H5"/>',globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>'};
+const I=(n,c='')=>`<svg class="i ${c}" viewBox="0 0 24 24" aria-hidden="true">${IC[n]}</svg>`;
+const CI={'לינה':'bed','אוכל':'food','תחבורה':'bus','אטרקציות':'ticket','טיסות':'plane','קניות':'shop','בריאות':'health','אחר':'dots'};
+
+IC.back='<path d="m9 6 6 6-6 6"/>';IC.go='<path d="m15 6-6 6 6 6"/>';
+const ils=n=>'₪'+Math.round(n||0).toLocaleString('he-IL');
+const k=n=>Math.abs(n)>=1e4?'₪'+(n/1e3).toFixed(n>=1e5?0:1).replace('.0','')+'K':ils(n);
+const D=s=>new Date(s+'T00:00:00');
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const days=(a,b)=>Math.round((D(b)-D(a))/864e5);
+const addM=(s,m)=>{const d=D(s);d.setDate(d.getDate()+Math.round(m*30.4));return d};
+const fmtD=d=>d.getDate()+' '+MO[d.getMonth()]+(d.getFullYear()!==new Date().getFullYear()?' '+String(d.getFullYear()).slice(2):'');
+const ls={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const mig=o=>{if(o.legs&&o.legs.some(l=>!l.a)){let st=o.dep||'2027-12-01';o.legs=o.legs.map(l=>{if(l.a)return l;const a=st,dd=new Date(a+'T00:00:00');dd.setDate(dd.getDate()+(+l.d||30));const b=iso(dd);st=b;return {id:l.id,r:ALIAS[l.r]||l.r,p:l.p||'',a,b}})}if(o.names&&o.names[1]==='החבר')o.names=[o.names[0],'עובדיה'];if(o.dis==='2027-07-20'){o.dis='2027-08-03';o.grant=[false,false]}if(o.dep==='2028-02-01')o.dep='2027-12-01';if(o.legs&&o.legs.length===3&&o.legs[0].p==='אל צ׳לטן, טורס דל פיינה, בריילוצ׳ה')o.legs=LEGS();return o};
+let S=mig(Object.assign(def(),ls.get('trip.s')||{}));
+let EXP=ls.get('trip.e')||[];
+let ckStyle='coral';let me=ls.get('trip.me')??0,pv=me,editing=null;
+let mainRef=null,expCol=null,writing=false,dirty=false,tmr=null;
+let tab=(location.hash||'#home').slice(1);
+let form={cat:'אוכל',cur:'$',pay:0,for:2};
+const $=id=>document.getElementById(id),view=$('view');
+const toast=t=>{const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('show'),1800)};
+
+function save(){ls.set('trip.s',S);if(!mainRef)return;dirty=true;clearTimeout(tmr);tmr=setTimeout(flush,700)}
+async function flush(){if(writing||!dirty)return;writing=true;dirty=false;
+ try{await mainRef.set({s:JSON.parse(JSON.stringify(S)),at:Date.now()});setSync('מסונכרן',1)}catch(e){setSync(e&&e.code==='invalid_argument'?'צפייה בלבד':'במכשיר בלבד')}
+ writing=false;if(dirty)flush()}
+
+// ---- calculations
+function legPlan(){const out=[];for(const l of S.legs){if(!l.a||!l.b)continue;const s=D(l.a),e=D(l.b),dd=Math.max(0,days(l.a,l.b));
+ const ms=[];for(let d=new Date(s);d<e;d.setDate(d.getDate()+7))ms.push(d.getMonth());if(!ms.length)ms.push(s.getMonth());
+ const k=R[l.r]?l.r:(R[ALIAS[l.r]]?ALIAS[l.r]:'thailand'),r=R[k],fit=ms.reduce((a,m)=>a+r.s[m],0)/ms.length;
+ out.push({...l,k,R:r,s,e,d:dd,ms,fit,cost:dd*r.u*S.rate})}return out.sort((x,y)=>x.s-y.s)}
+function totals(){const lp=legPlan(),ground=lp.reduce((a,l)=>a+l.cost,0),dd=lp.reduce((a,l)=>a+l.d,0);
+ const base=ground+ +S.flights+ +S.insCost+ +S.gearCost;return{lp,ground,dd,base,need:base*(1+S.buffer/100)}}
+function proj(i){const t=today(),mA=Math.max(0,days(t,S.dis)/30.4),mW=Math.max(0,days(S.dis>t?S.dis:t,S.dep)/30.4);
+ return +S.saved[i]+(+(S.armyT||[])[i]||0)+(+(S.workT||[])[i]||0)+(S.grant[i]&&mW>=6?11461:0)+(S.dis>t?(+(S.msh||[])[i]||0):0)+((S.pikIn||[])[i]?(+(S.pik||[])[i]||0):0)}
+const toIls=e=>(+e.a||0)*(S.rates[e.c]??1);
+const ini=i=>esc((S.names[i]||'?').trim().charAt(0)||'?');
+
+const scene=()=>`<svg class="scene" viewBox="0 0 400 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b3b4a"/><stop offset=".55" stop-color="#1d6f7d"/><stop offset=".85" stop-color="#ff9a62"/><stop offset="1" stop-color="#ffc48a"/></linearGradient>
+<linearGradient id="lk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff9a62" stop-opacity=".55"/><stop offset="1" stop-color="#0b3b4a"/></linearGradient></defs>
+<rect width="400" height="230" fill="url(#sky)"/><circle cx="96" cy="170" r="30" fill="#ffd9a3" opacity=".9"/>
+<g fill="#fff" opacity=".7"><circle cx="330" cy="30" r="1"/><circle cx="290" cy="52" r=".8"/><circle cx="360" cy="70" r=".9"/><circle cx="250" cy="22" r=".7"/></g>
+<path d="M0 182 L52 140 L84 160 L132 108 L170 150 L210 118 L262 160 L300 126 L340 150 L400 116 V230 H0Z" fill="#2b5868" opacity=".75"/>
+<path d="M0 196 L60 158 L98 176 L150 120 L176 140 L192 126 L232 176 L286 140 L330 172 L372 150 L400 164 V230 H0Z" fill="#123f4e"/>
+<path d="M150 120 L164 133 L170 128 L176 140 L168 136 L160 142 L156 132Z M286 140 L298 150 L304 147 L310 156 L299 153 L292 158Z" fill="#eef6f7" opacity=".9"/>
+<path d="M0 204 H400 V230 H0Z" fill="#0b3b4a"/><path d="M60 212h70M220 218h90M150 224h40" stroke="#ff9a62" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/>
+<path id="fp" d="M380 60 Q240 0 40 70" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="1.6" stroke-dasharray="5 6"/>
+<g class="plane" style="offset-path:path('M380 60 Q240 0 40 70');offset-rotate:auto 180deg"><g transform="translate(-9 -9) scale(.75)"><path d="${'M10.5 3.5 13 10l6 .5c1.5.2 1.5 2.8 0 3l-6 .5-2.5 6.5H8.5l1-6.5-4 .5-1.5 2H2.5l.5-3.5-.5-3.5H4l1.5 2 4 .5-1-6.5z'}" fill="#fff" transform="rotate(180 12 12)"/></g></g></svg>`;
+
+const beach=()=>`<svg class="beach" viewBox="0 0 400 560" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs>
+<linearGradient id="bsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0d2a4a"/><stop offset=".35" stop-color="#2d5f86"/><stop offset=".62" stop-color="#e98a6a"/><stop offset=".74" stop-color="#ffc77d"/></linearGradient>
+<radialGradient id="bsun" cx="0.5" cy="0.5" r="0.5"><stop offset="0" stop-color="#fff6d8"/><stop offset=".35" stop-color="#ffe0a0" stop-opacity=".9"/><stop offset="1" stop-color="#ffb86b" stop-opacity="0"/></radialGradient>
+<linearGradient id="bsea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e7a27a"/><stop offset=".08" stop-color="#3d93a8"/><stop offset=".5" stop-color="#16a3b3"/><stop offset="1" stop-color="#5fe0d6"/></linearGradient>
+<linearGradient id="bsand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6dcae"/><stop offset="1" stop-color="#e9c18a"/></linearGradient>
+<linearGradient id="bk1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b6f7d"/><stop offset="1" stop-color="#8a8f95"/></linearGradient>
+<linearGradient id="bk2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#24453f"/><stop offset=".35" stop-color="#2f4b49"/><stop offset="1" stop-color="#3c4f55"/></linearGradient>
+<linearGradient id="bfade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset=".3" stop-color="#000" stop-opacity="0"/><stop offset=".7" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".45"/></linearGradient></defs>
+<rect width="400" height="560" fill="url(#bsky)"/>
+<g fill="#fff" opacity=".8"><circle cx="40" cy="40" r=".9"/><circle cx="120" cy="22" r=".7"/><circle cx="300" cy="60" r="1"/><circle cx="350" cy="28" r=".7"/><circle cx="230" cy="44" r=".6"/><circle cx="80" cy="96" r=".6"/></g>
+<g fill="#fff" opacity=".18"><ellipse cx="90" cy="250" rx="90" ry="6"/><ellipse cx="300" cy="228" rx="110" ry="5"/><ellipse cx="200" cy="270" rx="70" ry="4"/></g>
+<circle class="sunglow" cx="236" cy="320" r="120" fill="url(#bsun)"/><circle cx="236" cy="322" r="30" fill="#fff4d6"/>
+<path d="M0 330 C40 326 70 300 82 262 C90 236 104 232 112 258 C118 280 126 300 140 330Z M300 330 C306 300 316 282 326 286 C338 290 344 270 352 262 C362 252 370 270 376 300 L382 330Z" fill="url(#bk1)" opacity=".75"/>
+<rect y="330" width="400" height="230" fill="url(#bsea)"/>
+<g stroke="#fff3cf" stroke-linecap="round" class="glint"><path d="M216 338h40" stroke-width="2.5" opacity=".9"/><path d="M206 348h58" stroke-width="2" opacity=".7"/><path d="M222 360h30" stroke-width="2" opacity=".6"/><path d="M196 374h70" stroke-width="1.5" opacity=".45"/><path d="M214 392h40" stroke-width="1.5" opacity=".35"/></g>
+<path d="M-10 346 C-6 280 4 200 22 170 C36 148 50 150 58 176 C64 196 62 214 74 220 C86 226 92 250 96 290 C99 316 104 336 108 346Z" fill="url(#bk2)"/>
+<path d="M22 170 C30 162 44 158 52 168 C46 168 38 172 30 182Z M60 214 C70 210 80 216 84 226 C76 222 70 222 62 226Z" fill="#3f7a52" opacity=".9"/>
+<path d="M4 230 C8 260 10 300 14 340 M40 196 C42 240 46 290 50 340 M74 236 C78 270 80 310 84 342" stroke="#1c3532" stroke-width="2" fill="none" opacity=".5"/>
+<path d="M310 352 C312 300 318 236 334 206 C344 188 356 186 364 204 C370 220 368 238 378 250 C390 264 396 300 410 352Z" fill="url(#bk2)"/>
+<path d="M334 206 C340 196 354 192 362 202 C354 202 346 206 340 214Z M376 248 C384 246 392 254 394 262 C388 258 382 258 376 262Z" fill="#3f7a52" opacity=".9"/>
+<path d="M340 240 C342 280 344 320 346 352 M366 230 C370 270 374 320 378 352" stroke="#1c3532" stroke-width="2" fill="none" opacity=".5"/>
+<g opacity=".35" fill="#0d3b45"><ellipse cx="50" cy="350" rx="70" ry="5"/><ellipse cx="358" cy="356" rx="60" ry="5"/></g>
+<g transform="translate(-95 6)"><g class="boat"><path d="M150 430 L232 430 L240 418 L246 412 L236 438 L158 440Z" fill="#5a3a24"/><path d="M158 434 L234 432" stroke="#e8b26a" stroke-width="2"/>
+<path d="M244 412 L250 398" stroke="#5a3a24" stroke-width="3" stroke-linecap="round"/><path d="M247 404 l6 -6 l2 10z" fill="#ff5a36"/><path d="M246 408 l-6 -10 l9 2z" fill="#ffd166"/><path d="M243 410 l2 -12 l5 8z" fill="#37c0b4"/>
+<path d="M176 430 L182 412 L206 412 L210 430" fill="#2f6f86"/><path d="M174 412 L214 412" stroke="#123" stroke-width="2"/><path d="M190 430 L190 412" stroke="#123" stroke-width="1"/>
+<ellipse cx="196" cy="444" rx="60" ry="4" fill="#0b6f7c" opacity=".35"/></g></g>
+<path d="M0 470 C60 456 120 462 200 476 C270 488 340 470 400 462 V560 H0Z" fill="#bdf3ea" opacity=".55"/>
+<path class="foam" d="M0 482 C50 470 110 474 170 486 C230 498 300 482 400 474" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".9"/>
+<path d="M0 490 C60 480 120 484 190 496 C260 508 330 492 400 484 V560 H0Z" fill="url(#bsand)"/>
+<path d="M0 494 C60 486 120 490 190 502 C260 514 330 498 400 490" fill="none" stroke="#d9aa72" stroke-width="2" opacity=".6"/>
+<g class="palm"><path d="M402 560 C392 520 378 470 352 420 C344 404 336 394 326 386" fill="none" stroke="#3b2a1c" stroke-width="9" stroke-linecap="round"/>
+<path d="M402 560 C392 520 378 470 352 420" fill="none" stroke="#6b4a2e" stroke-width="3" stroke-dasharray="2 6" opacity=".7"/>
+<g fill="#16352b"><path d="M326 386 C300 370 270 372 246 392 C276 384 300 388 326 392Z"/><path d="M326 386 C312 356 286 340 258 344 C288 356 306 368 324 392Z"/><path d="M326 386 C330 352 350 330 380 326 C360 344 344 362 330 392Z"/><path d="M326 386 C352 372 384 376 404 398 C378 390 352 390 330 394Z"/><path d="M326 386 C318 410 300 430 276 438 C296 420 310 404 322 386Z"/><path d="M326 386 C344 404 356 428 356 452 C346 430 336 412 324 392Z"/></g>
+<circle cx="324" cy="392" r="4" fill="#3b2a1c"/><circle cx="330" cy="394" r="3.5" fill="#4a3522"/></g>
+<g fill="none" stroke="#1b2b3a" stroke-width="1.6" stroke-linecap="round" opacity=".7"><path d="M110 150 q6 -5 12 0 q6 -5 12 0"/><path d="M142 170 q4 -3 8 0 q4 -3 8 0"/><path d="M90 182 q3 -2.5 6 0 q3 -2.5 6 0"/></g>
+<rect width="400" height="560" fill="url(#bfade)"/></svg>`;
+
+const goal=(i,T)=>(+(S.goal||[])[i]>0?+S.goal[i]:T.need);
+const picker=()=>`<div class="styles"><span class="xs">מראה הסימון:</span>${[['sq','ריבוע'],['circle','עיגול'],['coral','כתום'],['stamp','חותמת']].map(([v,n])=>`<button data-ck="${v}" class="${ckStyle===v?'on':''} ck-${v}"><span class="ck on" style="width:22px;height:22px">${I('check')}</span>${n}</button>`).join('')}</div>`;
+let showPick=false,editLeg=null;
+const share=(e,i)=>{const f=e.for??e.who;return f===2?toIls(e)/2:(f===i?toIls(e):0)};
+const paid=(e,i)=>{if(e.pay===undefined){return e.who===2?toIls(e)/2:(e.who===i?toIls(e):0)}return e.pay===i?toIls(e):0};
+const legAt=dt=>legPlan().find(l=>dt>=l.a&&dt<l.b)||null;
+const legBud=l=>l?l.R.u*S.rate:(+S.daily||1);
+function autoTasks(){const lp=legPlan(),seen=new Set(),out=[];
+ for(const l of lp){if(seen.has(l.k))continue;seen.add(l.k);const v=VISA[l.k];if(!v||v.s==='free')continue;
+  const dt=new Date(l.s);dt.setDate(dt.getDate()-v.lead);out.push({id:'v-'+l.k,auto:1,t:(v.s==='online'?'אישור כניסה ל':'ויזה ל')+l.R.n,sub:v.t,dt})}
+ if(lp.some(l=>YF.includes(l.k))){const dt=D(S.dep);dt.setDate(dt.getDate()-45);out.push({id:'yf',auto:1,t:'חיסון לקדחת צהובה',sub:'מומלץ לאזורי ג׳ונגל בדרום אמריקה, ויש מדינות שדורשות תעודה אם מגיעים ממדינה נגועה. לבדוק במרפאת מטיילים, לפחות 10 ימים לפני.',dt})}
+ if(lp.some(l=>TAGS.alt.includes(l.k)))out.push({id:'alt',auto:1,t:'להתייעץ על מחלת גבהים',sub:'יש במסלול יעדים בגובה רב – לשאול במרפאת מטיילים.',dt:addM(S.dep,-2)});
+ return out.map(x=>({...x,done:!!(S.autoDone||{})[x.id]}))}
+const allTodos=()=>[...S.todo.map(x=>({...x,dt:addM(x.b==='dis'?S.dis:S.dep,x.o)})),...autoTasks()].sort((a,b)=>a.dt-b.dt);
+function gearSuggest(){const lp=legPlan(),tags=new Set();for(const l of lp){for(const[tg,arr] of Object.entries(TAGS))if(arr.includes(l.k))tags.add(tg);if(l.fit<.9)tags.add('rain')}
+ const have=new Set(S.gear.map(g=>g.t));const out=[];for(const tg of tags)for(const t of TGEAR[tg])if(!have.has(t)&&!out.includes(t))out.push(t);return out}
+const todoRow=(x,E)=>`<div class="r ${x.done?'done':''}"><button class="ck ${x.done?'on':''}" ${x.auto?`data-auto="${x.id}"`:`data-todo="${x.id}"`} aria-label="סמן">${I('check')}</button><span class="t">${esc(x.t)}${x.auto?' <span class="tag">לפי המסלול</span>':''}<small>${fmtD(x.dt)}${!x.done&&x.dt<new Date()?' · באיחור':''}${x.sub?' · '+esc(x.sub):''}</small></span>${E&&!x.auto?`<button class="del" data-del="todo:${x.id}">מחיקה</button>`:''}</div>`;
+let edit=null,prepTab='todo',showAll=false;
+const TABS=[['home','שער'],['money','כסף'],['route','מסלול'],['trip','יומן']];
+const nm=i=>esc(S.names[i]||'');
+const fmtN=v=>{const s=String(v??'').replace(/[^\d.]/g,'');if(s==='')return '';const[a,b]=s.split('.');return (+a||0).toLocaleString('en-US')+(b!==undefined?'.'+b:'')};
+const parseN=v=>+String(v??'').replace(/[^\d.]/g,'')||0;
+const inp=(key,v,t='number',x='')=>t==='number'?`<input type="text" inputmode="decimal" data-fmt data-k="${key}" value="${esc(fmtN(v))}" ${x}>`:`<input type="${t}" data-k="${key}" value="${esc(v)}" ${x}>`;
+const r=(title,sub,right)=>`<div class="r"><span class="t">${title}${sub?`<small>${sub}</small>`:''}</span>${right}</div>`;
+const bar=(p,c='')=>`<div class="bar"><i class="${c}" style="width:${Math.max(0,Math.min(100,p*100))}%"></i></div>`;
+const ph=(kick,title,deck,back)=>`<header class="ph rise">${back?`<a class="back" href="#home">${I('back')} חזרה לשער</a>`:''}<div class="kick">${kick}</div><h1 style="margin-top:6px">${title}</h1>${deck?`<p class="deck">${deck}</p>`:''}</header>`;
+const sh=(title,key)=>`<div class="sechead"><h3>${title}</h3>${key?`<button class="tlink" data-edit="${key}">${edit===key?'סיום':'עריכה'}</button>`:''}</div>`;
+const ledger=(label,val)=>`<div class="r" style="min-height:52px"><span>${label}</span><span class="lead"></span><span class="v num">${val}</span></div>`;
+const monthName=d=>['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'][d.getMonth()]+' '+d.getFullYear();
+
+// ---- pages
+function home(){const T=totals(),t=today(),p=proj(0)+proj(1),need=goal(0,T)+goal(1,T),dDep=Math.max(0,days(t,S.dep)),dDis=Math.max(0,days(t,S.dis));
+ const td=allTodos(),open=td.filter(x=>!x.done);
+ const prepN=S.gear.length+S.ins.length+td.length,prepD=S.gear.filter(x=>x.d[me]).length+S.ins.filter(x=>x.d[me]).length+td.filter(x=>x.done).length;
+ const tdy=EXP.filter(e=>e.dt===t&&!e.settle).reduce((a,e)=>a+toIls(e),0);
+ const names=T.lp.map(l=>l.R.n.split(' (')[0]);
+ return `<section class="hero">${beach()}<div class="hov">
+  <div class="hm rise"><h1>הטיול הגדול</h1><button class="av ${mainRef?'ok':''}" data-me aria-label="החלף משתמש">${nm(me)}</button></div>
+  <div class="hmeta rise d1"><span>${nm(0)} ו${nm(1)}</span><span>יציאה: ${monthName(D(S.dep))}</span></div>
+  <div class="hb"><div class="cd num rise d2">${dDep}</div><div class="cl rise d3">ימים עד שעולים למטוס</div><div class="tag rise d3">${names.length?esc(names.join(' · ')):'המסלול עוד לא נקבע'}</div></div></div></section>
+ <div class="lines rise d2"><div><span class="xs">לשחרור</span><b class="num">${dDis}</b><span class="xs">ימים</span></div><div><span class="xs">בקופה בטיסה</span><b class="num">${k(p)}</b><span class="xs">${Math.round(Math.min(999,p/need*100))}% מהיעד</span></div><div><span class="xs">על הדרך</span><b class="num">${T.dd}</b><span class="xs">ימים</span></div></div>
+ <div class="sechead"><h3>בגיליון הזה</h3></div>
+ <div class="tocs">
+ <a class="toc feat" href="#money"><span class="th th-sea">${I('wallet')}</span><div class="t"><span class="kick">כסף</span><h3>${p>=need?'התקציב סגור, אפשר לנשום':'חסרים '+ils(need-p)+' עד הטיסה'}</h3>
+  <div class="mini"><div class="mbar"><i style="width:${Math.min(100,p/need*100)}%"></i></div><span class="num">${Math.round(Math.min(999,p/need*100))}%</span></div><span class="xs">${ils(p)} צפויים מתוך ${ils(need)}</span></div></a>
+ <a class="toc" href="#route"><span class="th th-acc">${I('map')}</span><div class="t"><span class="kick">מסלול</span><h3>${T.dd} ימים, ${S.legs.length} תחנות</h3>
+  <div class="stops">${names.map((n,j)=>`<span><b>${j+1}</b> ${esc(n)}</span>`).join('')||'<span>עוד לא נבחר</span>'}</div></div></a>
+ <a class="toc" href="#prep"><span class="th th-ink">${I('bag')}</span><div class="t"><span class="kick">הכנות</span><h3>${prepD} מתוך ${prepN} מוכנים</h3>
+  <div class="mini"><div class="mbar"><i style="width:${prepN?prepD/prepN*100:0}%"></i></div><span class="num">${prepN?Math.round(prepD/prepN*100):0}%</span></div><span class="xs">משימות, ציוד וביטוח</span></div></a>
+ <a class="toc" href="#trip"><span class="th th-sand">${I('receipt')}</span><div class="t"><span class="kick">יומן</span><h3>${EXP.length?'היום הוצאתם '+ils(tdy):'מחכה לטיול'}</h3><span class="xs">${EXP.length?EXP.length+' רישומים ביומן':'כאן תרשמו כל הוצאה בדרך'}</span></div></a>
+ </div>
+ <div class="sechead"><h3>הבא בתור</h3><a class="tlink" href="#prep">כל המשימות</a></div>
+ ${open.slice(0,3).map(x=>todoRow(x,false)).join('')||'<div class="empty">כל המשימות סגורות.</div>'}`}
+
+function money(){const T=totals(),i=pv,p=proj(i),G=goal(i,T),c=p>=G,mLeft=Math.max(1,days(today(),S.dep)/30.4);
+ return ph('כסף','כמה זה עולה',`${S.goal[i]>0?'היעד של '+nm(i)+' הוא':'לפי המסלול, כל אחד מכם צריך'} <b>${ils(G)}</b>. ${nm(i)} יגיע לטיסה עם <b>${ils(p)}</b>${c?' – יותר ממה שצריך.':', כלומר חסרים <b>'+ils(G-p)+'</b>, בערך '+ils((G-p)/mLeft)+' נוספים בכל חודש.'}`)+
+ `<div class="figure num rise d1">${ils(T.need)}</div><div class="xs">לאדם, כולל ${esc(S.buffer)}% מרווח ביטחון</div>
+ <div style="margin-top:18px">${ledger('שטח: לינה, אוכל, תחבורה',ils(T.ground))}${ledger('טיסות',ils(S.flights))}${ledger('ביטוח',ils(S.insCost))}${ledger('ציוד',ils(S.gearCost))}</div>
+ <div class="sechead"><h3>תוכנית החיסכון</h3></div>
+ <div class="tabs" style="margin-top:6px">${[0,1].map(j=>`<button data-pv="${j}" class="${j===i?'on':''}">${nm(j)}</button>`).join('')}</div>
+ <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:18px"><span class="figure num" style="margin:0;font-size:clamp(44px,13vw,64px)">${ils(p)}</span><span class="sm mute num">${Math.round(Math.min(999,p/G*100))}%</span></div>
+ ${bar(p/G,c?'good':'acc')}<div class="xs" style="margin-top:8px">צפי ביום הטיסה, מתוך יעד של ${ils(G)}</div>
+ <div style="margin-top:10px">${r('יעד חיסכון',S.goal[i]>0?'ידני · למחוק כדי לחזור לחישוב לפי המסלול':'אוטומטי לפי המסלול · אפשר לשנות',`<input type="text" inputmode="decimal" data-fmt data-k="goal.${i}" value="${S.goal[i]>0?esc(fmtN(S.goal[i])):''}" placeholder="${fmtN(Math.round(T.need))}">`)}${r('חסוך כבר','₪',inp('saved.'+i,S.saved[i]))}</div>
+ <details><summary>פירוט החיסכון<span class="pm">+</span></summary><div class="dbody">${r('חיסכון מהצבא','סה״כ שתחסוך עד השחרור',inp('armyT.'+i,S.armyT[i]))}${r('חיסכון מהעבודה','סה״כ שתחסוך מהשחרור עד הטיסה',inp('workT.'+i,S.workT[i]))}${r('מענק שחרור','נכנס לחשבון אחרי השחרור, חופשי לשימוש. ללוחם כ-687 ₪ לחודש שירות',inp('msh.'+i,S.msh[i]))}
+ <div class="r"><button class="ck ${S.pikIn[i]?'on':''}" data-tog="pikIn.${i}" aria-label="לכלול פיקדון">${I('check')}</button><span class="t">פיקדון שחרור${S.pikIn[i]?'':' (לא נספר)'}<small>משתחרר רק ללימודים, דיור, עסק או נישואין. סמנו רק אם יש לכם דרך להשתמש בו</small></span>${inp('pik.'+i,S.pik[i])}</div></div></details>
+ <details><summary>הנחות התקציב<span class="pm">+</span></summary><div class="dbody">
+  ${r('טיסות','₪ לאדם',inp('flights',S.flights))}${r('ביטוח','לכל הטיול',inp('insCost',S.insCost))}${r('ציוד','',inp('gearCost',S.gearCost))}${r('מרווח ביטחון','%',inp('buffer',S.buffer))}${r('שער דולר','',inp('rate',S.rate,'number','step="0.01"'))}
+  ${r('מענק עבודה מועדפת','11,461 ₪ אחרי 6 חודשים',`<button class="ck ${S.grant[i]?'on':''}" data-tog="grant.${i}" aria-label="מענק">${I('check')}</button>`)}</div></details>
+ <p class="quote">מענק השחרור הוא כסף חופשי ואפשר לטוס איתו. הפיקדון סגור למטרות מוכרות, ולכן הוא לא נספר אלא אם מסמנים אותו.</p>`}
+
+function route(){const T=totals(),lp=T.lp,inTrip=new Set(lp.flatMap(l=>l.ms));
+ const fit=f=>f>=1.6?['var(--good)','עונה מעולה']:f>=.9?['var(--mute)','עונה סבירה']:['var(--acc)','עונה לא טובה'];
+ const zones=[...new Set(Object.values(R).map(z=>z.z))];
+ const opts=sel=>zones.map(z=>`<optgroup label="${z}">${Object.entries(R).filter(([,x])=>x.z===z).map(([kk,x])=>`<option value="${kk}" ${sel===x?'selected':''}>${x.n}</option>`).join('')}</optgroup>`).join('');
+ const first=lp[0],last={e:new Date(Math.max(...lp.map(l=>+l.e)))};
+ return ph('מסלול',lp.length?esc(lp.map(l=>l.R.n.split(' (')[0]).join(', ')):'בונים מסלול',lp.length?`${T.dd} ימים על הדרך, מ-${fmtD(first.s)} עד ${fmtD(last.e)}. עלות השטח לאדם: <b>${ils(T.ground)}</b>.`:'הוסיפו יעד ראשון: בוחרים מדינה ותאריכי הגעה ועזיבה.')+
+ `<div class="sechead"><h3>היעדים</h3><span class="xs">${lp.length} יעדים</span></div>`+
+ lp.map((l,n)=>{const[fc,ft]=fit(l.fit),E=editLeg===l.id,bad=l.b<=l.a;return `<div class="leg"><span class="n num">${n+1}</span><div><h3>${esc(l.R.n)}</h3>${l.p?`<div class="xs">${esc(l.p)}</div>`:''}
+  <div class="dates"><div><span class="xs">הגעה</span><b class="num">${fmtD(l.s)}</b></div><div><span class="xs">עזיבה</span><b class="num">${fmtD(l.e)}</b></div><div><span class="xs">ימים</span><b class="num">${l.d}</b></div></div>
+  <div class="sm" style="margin-top:8px"><span style="color:${fc};font-weight:600">${ft}</span> · <span class="num mute">בערך ${ils(l.cost)} לאדם</span></div>
+  ${l.fit<.9?`<div class="xs" style="margin-top:4px">${esc(l.R.x)}</div>`:''}${VISA[l.k]?`<div class="sm" style="margin-top:6px"><b style="color:${VISA[l.k].s==='free'?'var(--good)':'var(--acc)'}">${VISA[l.k].s==='free'?'בלי ויזה':VISA[l.k].s==='online'?'אישור אונליין':'צריך ויזה'}.</b> <span class="mute">${esc(VISA[l.k].t)}</span></div>`:''}${bad?`<div class="sm" style="color:var(--acc);margin-top:4px">תאריך העזיבה צריך להיות אחרי ההגעה</div>`:''}</div>
+  <button class="tlink" data-editleg="${l.id}" style="align-self:start">${E?'סגירה':'עריכה'}</button>
+  ${E?`<div class="ed2"><label>יעד<select data-leg="${l.id}:r">${opts(l.R)}</select></label>
+   <label>מקומות (לא חובה)<input type="text" data-leg="${l.id}:p" value="${esc(l.p)}" placeholder="למשל: באנגקוק, צ׳יאנג מאי"></label>
+   <div class="two"><label>תאריך הגעה<input type="date" data-leg="${l.id}:a" value="${esc(l.a)}"></label><label>תאריך עזיבה<input type="date" data-leg="${l.id}:b" value="${esc(l.b)}"></label></div>
+   <div class="two"><button class="btn" data-editleg="${l.id}">שמירה</button><button class="btn line" data-del="legs:${l.id}" style="color:var(--acc);border-color:var(--acc)">מחיקת יעד</button></div></div>`:''}</div>`}).join('')+
+ `<div style="padding:18px 0 0"><button class="btn" data-addleg>${I('plus')} הוספת יעד</button></div>`+
+ `<div class="sechead"><h3>מתי לנסוע לאן</h3></div>
+ ${zones.map(z=>`<details><summary>${z}<span class="pm">+</span></summary><div class="dbody"><table class="cal"><thead><tr><th></th>${MO.map((m,j)=>`<th class="${inTrip.has(j)?'me':''}">${j+1}</th>`).join('')}</tr></thead>
+  <tbody>${Object.values(R).filter(x=>x.z===z).map(x=>`<tr><td>${x.n}</td>${x.s.map(v=>`<td><i class="s${v}"></i></td>`).join('')}</tr>`).join('')}</tbody></table>
+  ${Object.values(R).filter(x=>x.z===z).map(x=>`<p class="sm" style="margin:12px 0 0"><b>${x.n}.</b> <span class="mute">${x.x} בערך $${x.u} ליום.</span></p>`).join('')}</div></details>`).join('')}
+ <div class="xs" style="margin-top:10px">כהה = עונה מעולה · בהיר = סבירה · מספר כתום = חודש שאתם בטיול</div>
+ <div class="sechead"><h3>על הטיסות</h3></div>
+ <p class="quote">לקנות 2–5 חודשים מראש ולטוס לפני ה-15 בדצמבר, לפני שמחירי החגים קופצים.</p>
+ ${[['דרום אמריקה','אין טיסה ישירה מישראל – עצירה באירופה (מדריד, רומא, ליסבון) או בארה״ב. לנחות בדרום ולחזור מהצפון.'],['המזרח','יש טיסות ישירות לבנגקוק ולהאנוי, ומשם לואו־קוסט לכל האזור.'],['אוסטרליה וניו זילנד','דרך אסיה או המפרץ. דצמבר–ינואר הכי יקר. שווה לבדוק ויזת Working Holiday.']].map(([a,b])=>`<p style="margin:0 0 14px"><b>${a}.</b> <span class="mute">${b}</span></p>`).join('')}
+ <div class="sechead"><h3>טיסות שמצאנו</h3>${(S.fl||[]).length?`<button class="tlink" data-edit="fl">${edit==='fl'?'סיום':'עריכה'}</button>`:''}</div>
+ ${(()=>{const L=(S.fl||[]).slice().sort((a,b)=>a.p-b.p);return L.map((f,j)=>`<div class="r"><span class="t">${esc(f.r)}${j===0&&L.length>1?' <span class="tag" style="background:var(--good)">הכי זול</span>':''}<small>${f.d?fmtD(D(f.d)):''}${f.s?' · '+esc(f.s):''}</small></span><span class="v num">${ils(f.p)}</span>${edit==='fl'?`<button class="del" data-del="fl:${f.id}">מחיקה</button>`:''}</div>`).join('')||'<p class="xs" style="margin:10px 0 0">רשמו כאן טיסות שמצאתם כדי להשוות ביניהן.</p>'})()}
+ <form class="flf" data-add="fl"><input name="r" placeholder="מסלול, למשל: ת״א → בואנוס איירס" required><div class="two"><input name="d" type="date" aria-label="תאריך"><input name="p" type="text" inputmode="decimal" data-fmt placeholder="מחיר ₪" required></div><div class="two"><input name="s" placeholder="איפה? (אתר / חברה)"><button class="btn" style="min-height:46px">שמירת טיסה</button></div></form>`}
+
+function prep(){const key=prepTab,E=edit===key,o=1-me;let body,doneN,tot;
+ if(key==='todo'){const td=allTodos();doneN=td.filter(x=>x.done).length;tot=td.length;
+  body=td.map(x=>todoRow(x,E)).join('')
+  +(E?`<form class="add" data-add="todo"><input name="t" placeholder="משימה חדשה" required><select name="o" style="width:110px;flex:none"><option value="-3">3 ח׳ לפני</option><option value="-1">חודש לפני</option><option value="-0.25">שבוע לפני</option></select><button>הוספה</button></form>`:'')}
+ else{const L=S[key],cats=key==='gear'?[...new Set(L.map(x=>x.cat))]:[''];doneN=L.filter(x=>x.d[me]).length;tot=L.length;
+  body=cats.map(c=>`${c?`<div class="sechead" style="margin-top:30px;border-bottom-width:1.5px"><h3 style="font-size:19px">${esc(c)}</h3><span class="xs num">${L.filter(x=>x.cat===c&&x.d[me]).length}/${L.filter(x=>x.cat===c).length}</span></div>`:''}${L.filter(x=>!c||x.cat===c).map(x=>`<div class="r ${x.d[me]?'done':''}">
+   <button class="ck ${x.d[me]?'on':''}" data-chk="${key}:${x.id}:${me}" aria-label="סמן">${I('check')}</button><span class="t">${esc(x.t)}</span>
+   ${E?`<button class="del" data-del="${key}:${x.id}">מחיקה</button>`:`<button class="fr ${x.d[o]?'on':''}" data-chk="${key}:${x.id}:${o}" aria-label="${nm(o)}">${esc((S.names[o]||'?').charAt(0))}</button>`}</div>`).join('')}`).join('')
+  +(key==='gear'&&gearSuggest().length?`<div class="sechead" style="margin-top:30px;border-bottom-width:1.5px"><h3 style="font-size:19px">מוצע לפי המסלול</h3><button class="tlink" data-addallgear>הוספת הכל</button></div><p class="xs" style="margin:8px 0 0">לפי האקלים והעונה של היעדים שבחרתם.</p>${gearSuggest().map(t=>`<div class="r"><span class="t">${esc(t)}</span><button class="tlink" data-addgear="${esc(t)}">הוספה</button></div>`).join('')}`:'')
+  +(E?`<form class="add" data-add="${key}"><input name="t" placeholder="פריט חדש" required>${key==='gear'?`<select name="cat" style="width:120px;flex:none">${cats.map(c=>`<option>${esc(c)}</option>`).join('')}</select>`:''}<button>הוספה</button></form>`:'')}
+ const deck={todo:'כל מה שצריך לסגור, לפי תאריכים, משחרור ועד יום הטיסה.',gear:`מה נכנס לתרמיל. הריבוע שלך; העיגול הקטן מראה מה ${nm(o)} כבר ארז.`,ins:'הכי חשוב בטיול ארוך: כמה ימים החברה מוכנה לבטח בנסיעה אחת. ומרפאת מטיילים 6–8 שבועות לפני – בחלק מדרום אמריקה דורשים קדחת צהובה.'}[key];
+ return ph('הכנות',`${doneN} מתוך ${tot}`,deck,1)+
+ `<div class="tabs">${[['todo','משימות'],['gear','ציוד'],['ins','ביטוח']].map(([kk,n])=>`<button data-prep="${kk}" class="${kk===key?'on':''}">${n}</button>`).join('')}<span style="margin-inline-start:auto"><button class="tlink" data-edit="${key}" style="font-size:15px;color:var(--ink)">${E?'סיום':'עריכה'}</button></span></div>
+ ${bar(tot?doneN/tot:0,'good')}${body}`}
+
+function trip(){const t=today(),mo=t.slice(0,7),AL=EXP.slice().sort((a,b)=>b.dt.localeCompare(a.dt)||(b.ts||0)-(a.ts||0)),all=AL.filter(e=>!e.settle);
+ const sum=f=>all.filter(f).reduce((a,e)=>a+toIls(e),0);
+ const tot=sum(()=>1),tdy=sum(e=>e.dt===t),mon=sum(e=>e.dt.startsWith(mo));
+ const lt=legAt(t),bud=legBud(lt);
+ const byCat=CATS.map(c=>[c,sum(e=>e.cat===c)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
+ const last=[...Array(14)].map((_,j)=>{const d=new Date();d.setDate(d.getDate()-13+j);const s=iso(d);return[sum(e=>e.dt===s)/2,legBud(legAt(s))]});
+ const cm=Math.max(...last.map(x=>Math.max(x[0],x[1])),1),list=showAll?AL:AL.slice(0,8);
+ const net=AL.reduce((a,e)=>a+paid(e,0)-share(e,0),0),debt=Math.abs(net),deb=net>0?1:0,cre=1-deb;
+ const lp=legPlan(),byLeg=lp.map(l=>{const ex=all.filter(e=>e.dt>=l.a&&e.dt<l.b);if(!ex.length)return null;const sp=ex.reduce((a,e)=>a+toIls(e),0),el=Math.max(1,Math.min(l.d,days(l.a,t)+1));return{l,pp:sp/2/el,b:legBud(l)}}).filter(Boolean);
+ const deck=lt?`אתם ב<b>${esc(lt.R.n)}</b>. התקציב שם: <b>${ils(bud)}</b> לאדם ליום.`:all.length?`סה״כ ${ils(tot)} ב-${all.length} רישומים.`:'כאן נרשמת כל הוצאה בטיול. לחצו על ״הוצאה חדשה״ והיומן יתחיל להתמלא.';
+ return ph('יומן הוצאות','היום',deck)+
+ `<div class="figure num rise d1">${ils(tdy)}</div><div class="xs">הוצאות היום, שניכם · תקציב ${ils(bud*2)}</div>
+ <div class="chart" aria-label="14 הימים האחרונים">${last.map(([v,b])=>`<div><i class="${v>b?'over':v>0?'v':''}" style="height:${v/cm*100}%"></i></div>`).join('')}</div>
+ <div class="xs" style="margin-top:6px;display:flex;justify-content:space-between"><span>לפני שבועיים</span><span>היום</span></div>
+ <div class="owe">${debt<1?`<b>אתם מאוזנים</b><span class="xs">אף אחד לא חייב כלום</span>`:`<span class="xs">מי חייב למי</span><b>${nm(deb)} חייב ל${nm(cre)} <span class="num">${ils(debt)}</span></b><button class="btn line" data-settle="${deb}:${Math.round(debt)}">סגרנו חשבון</button>`}</div>
+ <div style="margin-top:14px">${ledger('החודש',ils(mon))}${ledger('מתחילת הטיול',ils(tot))}${[0,1].map(j=>ledger('החלק של '+nm(j),ils(all.reduce((a,e)=>a+share(e,j),0)))).join('')}</div>
+ ${byLeg.length?sh('לפי מדינה')+byLeg.map(x=>`<div class="r" style="display:block"><div style="display:flex;justify-content:space-between"><span>${esc(x.l.R.n)}</span><span class="num sm"><b style="color:${x.pp>x.b?'var(--acc)':'var(--good)'}">${ils(x.pp)}</b> <span class="mute">/ ${ils(x.b)} ליום לאדם</span></span></div>${bar(x.pp/x.b,x.pp>x.b?'acc':'good')}</div>`).join(''):''}
+ ${byCat.length?sh('לאן הלך הכסף')+byCat.map(([c,v])=>ledger(c,ils(v))).join(''):''}
+ ${sh('רישומים',AL.length?'exp':'')}
+ ${list.map(e=>`<div class="r"><span class="mute">${I(e.settle?'wallet':CI[e.cat]||'dots')}</span><span class="t">${e.settle?'החזר חוב: '+nm(e.pay)+' ← '+nm(e.for):esc(e.n||e.cat)}<small>${fmtD(D(e.dt))}${e.settle?'':' · '+esc(e.cat)+' · '+(e.pay!==undefined?'שילם '+nm(e.pay)+' · ':'')+((e.for??e.who)===2?'לשניכם':'עבור '+nm(e.for??e.who))}</small></span><span style="text-align:left"><span class="v num">${esc(e.c)}${esc(fmtN(e.a))}</span>${e.c!=='₪'?`<small class="xs num" style="display:block">${ils(toIls(e))}</small>`:''}</span>${edit==='exp'?`<button class="del" data-dex="${esc(e.id)}">מחיקה</button>`:''}</div>`).join('')||'<div class="empty">היומן ריק בינתיים.</div>'}
+ ${AL.length>8?`<button class="tlink" data-more>${showAll?'פחות':'כל '+AL.length+' הרישומים'}</button>`:''}
+ <details style="margin-top:20px"><summary>תקציב ומטבעות<span class="pm">+</span></summary><div class="dbody">
+  <p class="xs" style="margin:0 0 6px">התקציב היומי נקבע לפי המדינה שאתם בה. מחוץ למסלול משתמשים בתקציב הזה:</p>
+  ${r('תקציב יומי לאדם','₪, כשאין יעד',inp('daily',S.daily))}${Object.entries(S.rates).filter(([c])=>c!=='₪').map(([c,v])=>r('שער '+esc(c),'₪ ל-1 · שער משוער, לעדכן',`<input type="text" inputmode="decimal" data-fmt data-rate="${esc(c)}" value="${esc(fmtN(v))}">`)).join('')}
+  <form class="add" data-add="rate"><input name="c" placeholder="מטבע חדש" required maxlength="5"><input name="v" type="number" step="any" inputmode="decimal" placeholder="שער" required style="width:90px;flex:none"><button>הוספה</button></form></div></details>
+ <details><summary>שמות ותאריכים<span class="pm">+</span></summary><div class="dbody">${r('אני','',inp('names.0',S.names[0],'text'))}${r('החבר','',inp('names.1',S.names[1],'text'))}${r('שחרור','',inp('dis',S.dis,'date'))}${r('טיסה','',inp('dep',S.dep,'date'))}</div></details>`}
+
+const VIEWS={home,money,route,trip,prep};
+function render(){if(tab==='places')tab='route';if(tab==='gear'||tab==='insure'){prepTab=tab==='gear'?'gear':'ins';tab='prep'}if(!VIEWS[tab])tab='home';
+ const ds=[...view.querySelectorAll('details')].map(d=>d.open);
+ view.innerHTML=VIEWS[tab]();view.querySelectorAll('details').forEach((d,j)=>{if(ds[j])d.open=true});
+ $('nav').innerHTML=TABS.map(([h,n])=>`<a href="#${h}" class="${h===tab||(tab==='prep'&&h==='home')?'on':''}">${n}</a>`).join('');
+ $('fab').hidden=tab!=='trip'}
+function segs(){$('paySeg').innerHTML=[0,1].map(j=>`<button type="button" data-pay="${j}" class="${j===form.pay?'on':''}">${nm(j)}</button>`).join('');
+ $('forSeg').innerHTML=[nm(0),nm(1),'שנינו'].map((n,j)=>`<button type="button" data-for="${j}" class="${j===form.for?'on':''}">${n}</button>`).join('')}
+function curFor(dt){const l=legAt(dt);if(l&&CUR[l.k]){const[c,rt]=CUR[l.k];if(S.rates[c]===undefined){S.rates[c]=rt;save()}form.cur=c}
+ $('cur').innerHTML=Object.keys(S.rates).map(c=>`<option ${c===form.cur?'selected':''}>${esc(c)}</option>`).join('')}
+function sheet(open){document.body.classList.toggle('open',open);if(open){
+ $('cur').innerHTML=Object.keys(S.rates).map(c=>`<option ${c===form.cur?'selected':''}>${esc(c)}</option>`).join('');
+ $('cats').innerHTML=CATS.map(c=>`<button type="button" data-cat="${c}" class="${c===form.cat?'on':''}">${I(CI[c])}${c}</button>`).join('');
+ form.pay=me;segs();
+ $('dt').value=today();curFor(today());setTimeout(()=>$('exf').a.focus(),300)}}
+const setSync=()=>{const a=view.querySelector('.av');if(a)a.classList.toggle('ok',!!mainRef)};
+
+const setK=(key,v)=>{const p=key.split('.');if(p.length>1)S[p[0]][+p[1]]=v;else S[key]=v};
+view.addEventListener('change',e=>{const el=e.target,d=el.dataset;
+ if(d.k){setK(d.k,'fmt' in d?parseN(el.value):el.type==='number'?(+el.value||0):el.value);save();render()}
+ else if(d.leg){const[id,f]=d.leg.split(':'),l=S.legs.find(x=>x.id===id);if(l){l[f]=el.value;if(f==='a'&&l.b<=l.a){const dd=D(l.a);dd.setDate(dd.getDate()+14);l.b=iso(dd)}save();render()}}
+ else if(d.rate){S.rates[d.rate]=parseN(el.value);save();render()}});
+document.addEventListener('input',e=>{const el=e.target;if(!el.dataset||!('fmt' in el.dataset))return;const fe=el.value.length-(el.selectionStart??el.value.length);const nv=fmtN(el.value);if(nv!==el.value){el.value=nv;const pos=Math.max(0,nv.length-fe);try{el.setSelectionRange(pos,pos)}catch(_){}}});
+document.addEventListener('click',e=>{if(e.target.closest('[data-close]')){sheet(false);return}
+ const b=e.target.closest('button');if(!b)return;const d=b.dataset;
+ if(b.id==='fab')sheet(true);
+ else if('me' in d){me=1-me;pv=me;ls.set('trip.me',me);render();toast('מחובר כ'+S.names[me])}
+ else if(d.del){const[kk,id]=d.del.split(':');S[kk]=S[kk].filter(x=>x.id!==id);save();render()}
+ else if(d.chk){const[kk,id,j]=d.chk.split(':'),x=S[kk].find(y=>y.id===id);if(x){x.d[+j]=!x.d[+j];save();render()}}
+ else if(d.todo){const x=S.todo.find(y=>y.id===d.todo);if(x){x.done=!x.done;save();render();if(x.done)toast('סומן כבוצע')}}
+ else if(d.tog){const[kk,j]=d.tog.split('.');S[kk][+j]=!S[kk][+j];save();render()}
+ else if(d.ck){ckStyle=d.ck;ls.set('trip.ck',ckStyle);applyCk();render()}
+ else if('pick' in d){showPick=!showPick;render()}
+ else if(d.pv){pv=+d.pv;render()}
+ else if(d.prep){prepTab=d.prep;edit=null;render()}
+ else if(d.edit){edit=edit===d.edit?null:d.edit;render()}
+ else if('more' in d){showAll=!showAll;render()}
+ else if('addleg' in d){const lp=legPlan(),a=lp.length?iso(lp[lp.length-1].e):S.dep,dd=D(a);dd.setDate(dd.getDate()+30);const l={id:uid(),r:'thailand',p:'',a,b:iso(dd)};S.legs.push(l);editLeg=l.id;save();render();setTimeout(()=>{const el=view.querySelector('[data-leg="'+l.id+':r"]');if(el)el.scrollIntoView({block:'center',behavior:'smooth'})},50)}
+ else if(d.editleg){editLeg=editLeg===d.editleg?null:d.editleg;render()}
+ else if(d.cat){form.cat=d.cat;$('cats').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))}
+ else if(d.pay){form.pay=+d.pay;segs()}
+ else if(d.for){form.for=+d.for;segs()}
+ else if(d.auto){S.autoDone=S.autoDone||{};S.autoDone[d.auto]=!S.autoDone[d.auto];save();render();if(S.autoDone[d.auto])toast('סומן כבוצע')}
+ else if(d.addgear){S.gear.push({id:uid(),cat:'לפי המסלול',t:d.addgear,d:[false,false]});save();render();toast('נוסף לרשימה')}
+ else if('addallgear' in d){for(const t of gearSuggest())S.gear.push({id:uid(),cat:'לפי המסלול',t,d:[false,false]});save();render();toast('נוסף לרשימה')}
+ else if(d.settle){const[db,am]=d.settle.split(':').map(Number);addExp({id:uid(),settle:1,a:am,c:'₪',cat:'החזר',pay:db,for:1-db,dt:today(),ts:Date.now()});toast('החשבון נסגר')}
+ else if(d.dex){delExp(d.dex)}});
+document.addEventListener('submit',e=>{e.preventDefault();const f=e.target,v=Object.fromEntries(new FormData(f));
+ if(f.id==='exf'){const a=parseN(v.a);if(!a)return;form.cur=v.c;addExp({id:uid(),a,c:v.c,cat:form.cat,pay:form.pay,for:form.for,who:form.for,dt:v.dt||today(),n:(v.n||'').slice(0,80),ts:Date.now()});f.reset();sheet(false);toast('נרשם ביומן');return}
+ const kk=f.dataset.add;if(!kk)return;if(kk==='rate'){const c=v.c.trim();if(c)S.rates[c]=+v.v||0}
+ else if(kk==='fl'){S.fl=S.fl||[];S.fl.push({id:uid(),r:v.r.slice(0,80),d:v.d||'',p:parseN(v.p),s:(v.s||'').slice(0,60)})}
+ else if(kk==='todo')S.todo.push({id:uid(),b:'dep',o:+v.o,t:v.t,done:false});
+ else S[kk].push({id:uid(),cat:v.cat||'',t:v.t,d:[false,false]});save();render()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')sheet(false)});
+$('dt').addEventListener('change',e=>curFor(e.target.value));
+async function addExp(x){if(expCol){try{await expCol.doc(x.id).set(x)}catch(e){toast('השמירה נכשלה')}}else{EXP.push(x);ls.set('trip.e',EXP);render()}}
+async function delExp(id){if(expCol){try{await expCol.doc(id).delete()}catch(e){}}else{EXP=EXP.filter(x=>x.id!==id);ls.set('trip.e',EXP);render()}}
+
+window.addEventListener('hashchange',()=>{tab=location.hash.slice(1)||'home';edit=null;editLeg=null;showAll=false;render();scrollTo(0,0)});
+const typing=()=>{const a=document.activeElement;return a&&(view.contains(a)||$('exf').contains(a))&&/INPUT|SELECT/.test(a.tagName)};
+const applyCk=()=>{document.body.className=document.body.className.replace(/\bck-\w+/g,'').trim();if(ckStyle!=='sq')document.body.classList.add('ck-'+ckStyle)};applyCk();
+$('fab').innerHTML=I('plus')+'הוצאה חדשה';render();
+
+const SB='https://mhlxgtbaiasmhcfamdns.supabase.co',KEY='sb_publishable__EkvIve2e9kLU_rb2lSjUg_C4lIKD_w';
+const qs=new URLSearchParams(location.search);let CODE=qs.get('t')||ls.get('trip.code');if(qs.get('t'))ls.set('trip.code',CODE);
+async function rpc(fn,body){const r=await fetch(SB+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok)throw new Error(r.status);const tx=await r.text();return tx?JSON.parse(tx):null}
+let lastAt=0;
+async function pull(force){if(!CODE)return;if(!force&&(dirty||writing||document.hidden||typing()||document.body.classList.contains('open')))return;
+ try{const d=await rpc('trip_get',{p_code:CODE});if(!d){setSyncOff();return}
+  if(force||d.at!==lastAt){lastAt=d.at;if(!dirty&&!writing){S=mig(Object.assign(def(),d.state||{}));ls.set('trip.s',S)}EXP=(d.exps||[]).filter(x=>x.dt);ls.set('trip.e',EXP);render()}
+  if(!mainRef){mainRef={set:o=>rpc('trip_save',{p_code:CODE,p_state:o.s})};expCol={doc:id=>({set:x=>rpc('exp_put',{p_code:CODE,p_id:id,p_data:x}).then(()=>pull(1)),delete:()=>rpc('exp_del',{p_code:CODE,p_id:id}).then(()=>pull(1))})};setSync()}}
+ catch(err){}}
+function setSyncOff(){mainRef=null;expCol=null;setSync()}
+if(CODE){pull(1);setInterval(()=>pull(0),6000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)pull(0)})}
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
